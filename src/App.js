@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import Contacts from './Component/Contacts/Contacts';
+import Header from './Component/Layouts/Header';
+import AddContacts from './Component/Contacts/AddContacts';
+import {HashRouter as Router, Route,Switch} from 'react-router-dom';//BrowserRouter - parent componenet which stores all other routers
+import About from './Component/Pages/About';
+import NotFound from './Component/Pages/NotFound';
+import Test from './Component/Test/test';
+import {Provider} from './Context';
+import EditContacts from './Component/Contacts/EditContacts';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Contact from './Component/Contacts/Contact';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Provider>
+      <Router>
+        <div className="App">        
+          <Header branding = "Contact Manager"/>
+          <div className="container">
+            <Switch>
+              <Route exact path ="/" component={Contacts}/>
+              <Route exact path ="/contact/add" component={AddContacts}/>
+              <Route exact path ="/about/:id" component={About}/>
+              <Route exact path ="/test" component={Test}/>
+              <Route exact path ="/edit/:id" component={EditContacts}/>
+              <Route component={NotFound}/>
+            </Switch>
+          </div>
+      </div>
+      </Router>      
+    </Provider>
+     
+  ); 
 }
 
 export default App;
